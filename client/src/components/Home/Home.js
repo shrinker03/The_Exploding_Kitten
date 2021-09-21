@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Button, Typography } from '@material-ui/core';
-import Modal from '../Modal/Modal';
 
+//Importing the Modal and UserModal Components.
+import Modal from '../Modal/Modal';
 import UserModal from './UserModal/UserModal';
 
+// Rendering the Landing Page and Modal component to take the Username as Input.
 const Home = () => {
   const [open, setOpen] = useState(false);
 
@@ -18,16 +20,6 @@ const Home = () => {
       backgroundSize: "cover", opacity: "0.8"}}
     >
       <Box width="100%" style={{position: 'absolute', top:'50%'}}>
-        {/* <Typography component="h2" variant="h3">
-          The Exploding Kitten Game
-        </Typography>
-      </Box>
-      <Box width="100%" mt="14vh">
-        <Typography component="h2" variant="h4" paragraph>
-          Hey, Welcome
-        </Typography>
-        <br />
-        <br /> */}
         <Typography component="h3" variant="h5" gutterBottom>
           Click here to start the Game
         </Typography>

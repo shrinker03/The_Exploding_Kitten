@@ -5,6 +5,8 @@ import { TextField, Button, Box, Typography } from '@material-ui/core';
 
 import { getSetUser } from '../../../redux/actions/user';
 
+
+// Taking the Username as an input in the form
 const UserModal = ({ getSetUser }) => {
   const [username, setUsername] = useState('');
 

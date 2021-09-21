@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles, Fade, Backdrop, Modal } from '@material-ui/core';
 
+
+// Providing a structure of a modal to the Main UserModal Component.
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',

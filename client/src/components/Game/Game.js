@@ -10,22 +10,25 @@ import {
   Divider,
 } from '@material-ui/core';
 
+// Importing Header, LeaderBoard and Card Components.
 import Header from './Header/Header';
 import LeaderBoard from './LeaderBoard/LeaderBoard';
 import Card from './Card/Card';
 
+// Importing the Styles required
 import './Card/style.css';
-
 import useStyles from './useStyles';
 
+// Importing syncGameToDB action to dispatch it later.
 import { syncGameToDB } from '../../redux/actions/user';
 
+// Providing a Main Logic to the Game
 const Game = ({ game, syncGameToDB }) => {
   const classes = useStyles();
 
+  // Defining the States 
   const [cards, setCards] = useState([]);
   const [defusingCard, setDefusingCard] = useState(0);
-
   const [gameStatus, setGameStatus] = useState({
     played: 0,
     win: 0,
@@ -33,12 +36,15 @@ const Game = ({ game, syncGameToDB }) => {
     status: 'loading',
   });
 
+  // Destructuring the gameStatus
   const { played, win, loose, status } = gameStatus;
 
+  // Defining the getCards array and defusing and then initializing getCards with a random set of 5 cards
   const startGame = (game) => {
     let getCards = [];
     let defusing = 0;
 
+    // Checking if the savedgame is available
     if (game?.savedGame && game?.savedGame?.cards?.length > 0) {
       getCards = [...game?.savedGame.cards];
       defusing = game?.savedGame.defusingCard;
@@ -51,12 +57,14 @@ const Game = ({ game, syncGameToDB }) => {
         getCards.push(gameCards[index]);
       }
 
+      // Setting the gameStatus
       setGameStatus((oldGameStatus) => ({
         ...oldGameStatus,
         status: 'running',
       }));
     }
 
+    // Updating the gameStatus
     setGameStatus((oldGameStatus) => ({
       ...oldGameStatus,
       played: game?.played || oldGameStatus?.played,
@@ -65,10 +73,12 @@ const Game = ({ game, syncGameToDB }) => {
       status: 'running',
     }));
 
+    // Destructuring the getCards array and providing setCards as an argument.
     setCards([...getCards]);
     setDefusingCard(defusing);
   };
 
+  // Use to Update the state if variable game changes 
   useEffect(() => {
     if (game?.username) startGame(game);
   }, [game]);
@@ -85,10 +95,13 @@ const Game = ({ game, syncGameToDB }) => {
     }, 1000);
   };
 
+  // Main game Logic
   const runGameLogic = () => {
+    // Defining the Last card
     let leftCards = cards;
     let lastCard = leftCards.pop();
 
+    // Defining the Stats
     const stats = {
       defusingCard,
       played,
@@ -97,6 +110,7 @@ const Game = ({ game, syncGameToDB }) => {
       status,
     };
 
+    // Checking Conditions for lastCard
     if (lastCard === 'shuffle') {
       stats.status = 'restarting';
       stats.defusingCard = 0;
@@ -126,6 +140,7 @@ const Game = ({ game, syncGameToDB }) => {
       stats.status = 'win';
     }
 
+    // Updating the Latest stats Values
     setGameValues(
       leftCards,
       stats.defusingCard,
@@ -136,6 +151,7 @@ const Game = ({ game, syncGameToDB }) => {
     );
   };
 
+  // Setting a latest Game values
   const setGameValues = (gCards, gDefusing, gPlayed, gWin, gLoose, gStatus) => {
     setCards([...gCards]);
     setDefusingCard(gDefusing);
@@ -146,6 +162,8 @@ const Game = ({ game, syncGameToDB }) => {
       loose: gLoose,
       status: gStatus,
     }));
+
+    // Syncing a Game with Database
     syncGameToDB(
       game?.username,
       {
@@ -158,6 +176,7 @@ const Game = ({ game, syncGameToDB }) => {
     );
   };
 
+  // Rendering the Game UI
   return (
     <Box position="relative">
       <Header username={game.username} />
