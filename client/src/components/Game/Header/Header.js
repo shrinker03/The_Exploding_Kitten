@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@material-ui/core';
-// import { FiberManualRecord } from '@material-ui/icons';
 
+// Renders Navbar
 const Header = ({ username }) => {
   return (
     <Box
@@ -22,9 +22,6 @@ const Header = ({ username }) => {
       </Typography>
 
       <Typography component="div">
-        {/* <Box component="span" px="2px">
-          <FiberManualRecord color="secondary" fontSize="small" />
-        </Box> */}
         Player Name: <b>{username}</b>
       </Typography>
     </Box>

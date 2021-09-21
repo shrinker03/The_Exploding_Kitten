@@ -6,6 +6,7 @@ import { getLeaderBoard } from '../../../redux/actions/user';
 import { Box, Button, Divider, Typography } from '@material-ui/core';
 import { Refresh } from '@material-ui/icons';
 
+// Renders LeaderBoard Component
 const LeaderBoard = ({ leaderBoard, getLeaderBoard }) => {
   const [users, setUsers] = useState([]);
 

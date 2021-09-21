@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Renders Card Component
 const Card = ({ id, card }) => {
   return (
     <div class="card-scene">
